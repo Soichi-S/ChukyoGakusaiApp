@@ -1,0 +1,641 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-20T00:00:00+09:00",
+
+  "edition": {
+    "year": 2025,
+    "number": 72,
+    "name": "第72回中京大学祭",
+    "campus": "名古屋キャンパス",
+    "theme": { "kanji": "月", "reading": "つき" },
+    "timezone": "Asia/Tokyo",
+    "coverImage": "images/cover.png",
+    "days": [
+      { "date": "2025-11-01", "label": "11月1日(土)", "open": "12:00", "close": "18:00" },
+      { "date": "2025-11-02", "label": "11月2日(日)", "open": "10:00", "close": "18:00" },
+      { "date": "2025-11-03", "label": "11月3日(月)", "open": "10:00", "close": "17:00" }
+    ]
+  },
+
+  "notices": [
+    {
+      "id": "notice-beat-cancel",
+      "title": "ダンス部BEAT 出場辞退のお知らせ",
+      "body": "11月2日(日) 13:00〜13:30に出演を予定しておりました、ダンス部BEATは諸事情により出場辞退となりました。楽しみにしてくださっていた皆様には、申し訳ございませんが、ご理解のほどお願いいたします。",
+      "publishedAt": "2025-11-01T00:00:00+09:00",
+      "relatedEventIds": ["ev-1102-beat"]
+    },
+    {
+      "id": "notice-guest-change",
+      "title": "ゲスト企画について",
+      "body": "出演者は予告なしに変更となる場合がございます。あらかじめご了承ください。",
+      "publishedAt": "2025-11-01T00:00:00+09:00",
+      "relatedEventIds": ["ev-1102-guest"]
+    }
+  ],
+
+  "greetings": [
+    {
+      "id": "greet-president",
+      "role": "中京大学長",
+      "name": "梅村清英",
+      "body": "第72回中京大学祭の開催、誠におめでとうございます。\n本年度の大学祭が、「月」をテーマとして盛大に開催されますことを、非常に楽しみにいたしております。月は、みずからが光を発することはありません。しかし、太陽の光を受けて輝き続ける月は、潮の満ち引きを生み出すなど、わたしたち人類にとってなくてはならない存在です。\n時とともにその姿や場所をしなやかに変化させていくさまは、夜道で迷った人の道しるべともいえましょう。\n中京大学も、先の読みにくい時代であるからこそ、将来の希望を明るく照らし出す存在でありたいと願っています。これまでの伝統を引き継ぐとともに、来場者に心の底からの笑顔を届けようという実行委員会の皆さんの思いは、必ずや大学祭を成功に導いていくでしょう。幅広い方々に楽しんでいただき、皆さんの思い出に残る大学祭となることを心より祈念しております。"
+    },
+    {
+      "id": "greet-nagoya",
+      "role": "第72回中京大学祭名古屋実行委員会 実行委員長",
+      "name": "井関俊介",
+      "body": "本日、第72回中京大学祭を無事に開催できますことを、心より嬉しく存じます。\n開催にあたり、多大なるご尽力を賜りました大学関係者の皆様、並びにご協賛企業の皆様をはじめ、多くの方々に厚く御礼申し上げます。\n本年度の中京大学祭のテーマ字は「月(つき)」です。\n月が太陽の光を受けて輝くように、中京大学祭は来場者お客様の笑顔をもらって初めて輝くと考えております。そこで中京大学祭で来場者お客様に心の底から「笑顔を届けたい」「楽しんでいただきたい」という思いを込めて「月」と定めました。\n今年度の中京大学祭が大学祭に関わるすべての方々にとって、華やかな時間となりますことを、実行委員一同、心より願っております。"
+    },
+    {
+      "id": "greet-toyota",
+      "role": "第32回中京大学祭とよた祭 実行委員長",
+      "name": "秋山悟資",
+      "body": "秋涼の候、第72回中京大学祭が盛大に開催されますことを、中京大学祭豊田実行委員会を代表し心よりお祝い申し上げます。\n「月」というテーマ字には、夜空を照らす光のように人々に寄り添い、また満ち欠けの移ろいを通じて成長や新たな始まりを象徴する意味があります。\n準備に尽力された皆様の思いが、この大学祭において一層の輝きを放つことを期待しております。\n当日訪れる方々にとっても、心に残る祭となることを願っております。\n最後に、大学祭のご成功と関係者皆様のご健勝を祈念し、挨拶といたします。"
+    }
+  ],
+
+  "rules": [
+    { "icon": "no_alcohol", "text": "大学内へのアルコールの持ち込み、飲酒は禁止です。" },
+    { "icon": "no_smoking", "text": "喫煙は指定の場所のみ可能です。キャンパスマップで喫煙所をご確認ください。" },
+    { "icon": "no_parking", "text": "大学内に駐車場はありません。大学周辺への駐停車はご遠慮ください。" },
+    { "icon": "no_littering", "text": "ポイ捨ては禁止です。大学内に設置されているゴミ箱に捨ててください。" },
+    { "icon": "camera", "text": "大学祭中、実行委員が撮影し、ホームページ等に掲載します。ご了承ください。" },
+    { "icon": "help", "text": "お困りの際は、最寄りの案内所までお越しいただくか、赤いジャンパーを着ている実行委員へお声がけください。" }
+  ],
+
+  "goods": {
+    "hours": [
+      { "date": "2025-11-01", "start": "12:00", "end": "18:00" },
+      { "date": "2025-11-02", "start": "10:00", "end": "18:00" },
+      { "date": "2025-11-03", "start": "10:00", "end": "17:00" }
+    ],
+    "items": [
+      {
+        "id": "goods-keyholder",
+        "name": "中京大学祭オリジナル ラバーキーホルダー",
+        "prices": [ { "label": "1つ", "yen": 400 }, { "label": "2つ", "yen": 700 } ],
+        "place": "出口案内所、1号館6階16B",
+        "image": "images/goods-keyholder.png"
+      },
+      {
+        "id": "goods-yunomi",
+        "name": "中京大学祭オリジナル 第72回 湯呑み",
+        "prices": [ { "label": "1つ", "yen": 800 } ],
+        "place": "1号館6階16B",
+        "note": "数量限定。なくなり次第終了です。",
+        "image": "images/goods-yunomi.png"
+      }
+    ]
+  },
+
+  "venues": [
+    { "id": "galleria", "name": "ガレリアステージ", "building": "0号館", "note": "中京フェス・ボーカルコンテスト・クイズ企画の会場" },
+    { "id": "seimei-hall", "name": "清明ホール", "building": "1号館", "floor": "3階" },
+    { "id": "gym", "name": "体育館", "note": "6号館の奥。キャンパスマップの「体育館への行き方」を参照" },
+    { "id": "ground", "name": "グラウンド" },
+    { "id": "room-431", "name": "431教室", "building": "4号館", "floor": "3階" },
+    { "id": "arena", "name": "アレーナ", "building": "2号館", "floor": "1階" },
+    { "id": "central-plaza", "name": "セントラルプラザ" },
+    { "id": "whole-campus", "name": "学校全体" }
+  ],
+
+  "eventCategories": [
+    { "id": "stage", "name": "ステージ企画" },
+    { "id": "guest", "name": "ゲスト企画" },
+    { "id": "contest", "name": "コンテスト・クイズ" },
+    { "id": "sports", "name": "スポーツ企画" },
+    { "id": "game", "name": "ゲーム企画" }
+  ],
+
+  "events": [
+    {
+      "id": "ev-1101-shodo", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-01", "start": "12:10", "end": "12:40", "venueId": "galleria",
+      "title": "中京大学文化会書道部",
+      "description": "こんにちは、書道部です。私たちはパフォーマンスの曲を決めてから文字構成など、みんなで真剣に、楽しく考えて、たくさん練習を重ねてきました。ぜひ、書道パフォーマンスを楽しんでください。",
+      "sns": [], "notify": true
+    },
+    {
+      "id": "ev-1101-navi", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-01", "start": "12:55", "end": "13:40", "venueId": "galleria",
+      "title": "나비（ナビ）",
+      "description": "中京大学八事キャンパスで活動しているKPOPコピーダンスサークル나비です！人気曲もたくさん踊るので、ぜひ一緒に楽しんでください！",
+      "sns": [ { "type": "instagram", "handle": "navi_copydance" } ], "notify": true
+    },
+    {
+      "id": "ev-1101-amygdalin", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-01", "start": "13:50", "end": "14:35", "venueId": "galleria",
+      "title": "Mr.AMYGDALIN",
+      "description": "2年連続！1人でも多くの人を元気にします！！なんと今年は…",
+      "sns": [ { "type": "instagram", "handle": "gawa_3510" } ], "notify": true
+    },
+    {
+      "id": "ev-1101-phil", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-01", "start": "14:55", "end": "15:15", "venueId": "galleria",
+      "title": "中京大学文化会フィルハーモニー交響楽団",
+      "description": "中京大学フィルハーモニー交響楽団は、学内唯一のオーケストラとして12月20日の定期演奏会に向け活動しています。中京フェスでは、みなさんも知っているあの有名な魔法の世界の楽曲を管弦合奏でお届けします！",
+      "sns": [ { "type": "x", "handle": "chukyophill" }, { "type": "instagram", "handle": "chukyophill" } ], "notify": true
+    },
+    {
+      "id": "ev-1101-vocal", "category": "contest",
+      "date": "2025-11-01", "start": "15:30", "end": "16:45", "venueId": "galleria",
+      "title": "ボーカルコンテスト企画",
+      "description": "優勝者には豪華景品が！",
+      "performers": [
+        { "no": 1, "name": "八木宏樹", "comment": "トップバッターを務めさせていただきます！楽しみつつ盛りあげるように頑張ります！" },
+        { "no": 2, "name": "おっきー", "comment": "「元気に楽しんで」をコンセプトに会場全体で盛り上がれるステージを目指します！みんなでボーカルコンテストを楽しみましょう！" },
+        { "no": 3, "name": "ほのか", "comment": "ギターのレベルは下手の横好きですが、みなさんの5分間を必ず素敵な時間にします！ぜひ聴いていってください！" },
+        { "no": 4, "name": "しぐれ", "comment": "頑張ります！" },
+        { "no": 5, "name": "しとりん", "comment": "人前で歌うのが初めてなのでとても緊張していますが、精一杯歌います！是非聞いてください！！" }
+      ],
+      "notify": true
+    },
+    {
+      "id": "ev-1101-quiz", "category": "contest",
+      "date": "2025-11-01", "start": "17:00", "end": "18:00", "venueId": "galleria",
+      "title": "クイズ企画",
+      "description": "その場で参加可能！豪華景品も！",
+      "notify": true
+    },
+    {
+      "id": "ev-1101-basketball", "category": "sports",
+      "date": "2025-11-01", "start": "12:30", "end": "15:30", "venueId": "gym",
+      "title": "バスケ大会",
+      "description": "ビッッッッッッックリするほど盛り上がる！！！ぜひ来てください！",
+      "reservation": "完全予約制", "notify": true
+    },
+    {
+      "id": "ev-1101-bingo", "category": "game",
+      "date": "2025-11-01", "start": "14:00", "end": "15:00", "venueId": "room-431",
+      "title": "LUCKY BINGO（ビンゴ企画）",
+      "description": "豪華景品があるかも!? ぜひ来てね。",
+      "notify": true
+    },
+
+    {
+      "id": "ev-1102-brass", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-02", "start": "10:10", "end": "10:25", "venueId": "galleria",
+      "title": "中京大学文化会吹奏楽団",
+      "description": "私たちは式典や地域イベントで演奏しており、12/26には定期演奏会を開催します！今回は「ジャパニーズグラフィティXⅧ」と「およげ！たいやきくん in Swing」を演奏します！",
+      "sns": [ { "type": "x", "handle": "chukyo_cubs" }, { "type": "instagram", "handle": "chukyo_cubs" } ], "notify": true
+    },
+    {
+      "id": "ev-1102-sg", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-02", "start": "10:40", "end": "11:40", "venueId": "galleria",
+      "title": "S☆G",
+      "description": "椙山女学園大学韓国文化部のS★Gです！私たちはkpopのカバーダンスをしています。私たちの可愛くてかっこいいダンスをぜひ見に来てください！",
+      "sns": [ { "type": "instagram", "handle": "sugiyama_s_" } ], "notify": true
+    },
+    {
+      "id": "ev-1102-nsjo", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-02", "start": "12:05", "end": "12:35", "venueId": "galleria",
+      "title": "軽音楽部 New Sounds Jazz Orchestra（NSJO）",
+      "description": "本日は、私たちの演奏を聴きに来てくださり、誠にありがとうございます！今日も精一杯演奏しますので、どうぞよろしくお願いします！",
+      "sns": [ { "type": "x", "handle": "chukyo_nsjo" }, { "type": "instagram", "handle": "chukyo_nsjo" } ], "notify": true
+    },
+    {
+      "id": "ev-1102-beat", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-02", "start": "13:00", "end": "13:30", "venueId": "galleria",
+      "title": "ダンス部BEAT",
+      "description": "大人気KPOPアイドルの曲や、世界中で大ヒットしたあの曲も！日々練習してきた成果を発揮します！BEATの魅力溢れるパワフルな動きや息のあったパフォーマンスにご注目ください！",
+      "status": "cancelled", "noticeId": "notice-beat-cancel", "notify": false
+    },
+    {
+      "id": "ev-1102-hogaku", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-02", "start": "13:50", "end": "14:10", "venueId": "galleria",
+      "title": "中部学生邦楽の集い",
+      "description": "中京大学和楽部と中部学生邦楽の集いのコラボ演奏！！！今回のステージ発表ではジブリメドレーを和楽器の音色でお届けいたします。普段聞く音楽との違いをぜひお楽しみください！",
+      "sns": [ { "type": "x", "handle": "ch_tsudoi" } ], "notify": true
+    },
+    {
+      "id": "ev-1102-gaku", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-02", "start": "14:30", "end": "15:35", "venueId": "galleria",
+      "title": "アカペラサークル楽",
+      "description": "私たちは、楽器を使わず「声」だけで音楽を奏でるアカペラに取り組んでいます。ポップスやバラード、洋楽など、さまざまなジャンルに挑戦しながら、メンバー同士でハーモニーを重ねています。学祭では、そんな私たちのアカペラをたくさんの方に楽しんでいただけたら嬉しいです。お時間がありましたら、ぜひ声だけで広がる音楽の世界を体感してみてください♪",
+      "sns": [ { "type": "x", "handle": "gaku_a_cappella" }, { "type": "instagram", "handle": "gaku_a_cappella" } ], "notify": true
+    },
+    {
+      "id": "ev-1102-ieh", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-02", "start": "15:45", "end": "16:05", "venueId": "galleria",
+      "title": "International Economic Human",
+      "description": "このステージに立ちたいという思いから、立ち上がった国際学部グループです！！今年の夏の暑さ以上の熱狂を届けます！！この演奏を聞けば、きっと貴方もIEHのトリコ…",
+      "sns": [], "notify": true
+    },
+    {
+      "id": "ev-1102-raf", "category": "stage", "series": "中京フェス",
+      "date": "2025-11-02", "start": "16:15", "end": "17:45", "venueId": "galleria",
+      "title": "R.A.F",
+      "description": "ストリートダンスサークルならではの、様々なジャンルからなるSCは見応え抜群です！私たちにしか出せない魅力いっぱいのダンスをご覧あれ！！",
+      "sns": [ { "type": "instagram", "handle": "rivalandfellow" } ], "notify": true
+    },
+    {
+      "id": "ev-1102-guest", "category": "guest",
+      "date": "2025-11-02", "start": "16:00", "end": null, "doorsOpen": "15:00", "venueId": "seimei-hall",
+      "title": "ダメー!!2025〜制御不能の爆笑お笑いライブ〜",
+      "performers": [ { "name": "トム・ブラウン" } ],
+      "description": "当日には質問コーナーがあります！ぜひ聞きたいことを用意してご来場ください！",
+      "ticket": { "type": "当日券", "distributedAt": "2025-11-02 12:00", "place": "1号館出口案内所前" },
+      "image": "images/guest.png",
+      "notify": true
+    },
+
+    {
+      "id": "ev-1103-dopers", "category": "stage", "series": "CHUKYO FES",
+      "date": "2025-11-03", "start": "10:45", "end": "11:25", "venueId": "galleria",
+      "title": "DOPERS",
+      "description": "名古屋発、高校卒業を機に東京に上京した5人組ラウドバンド。9月にリリースした「GLORY SHIP」は、背中を押すような歌詞と疾走感あふれる曲調が魅力で、観客が一体となって盛り上がれる楽曲だ。今年8月には、大学生が創る熱が震える音楽フェス「REVOLUTION NIGHT」のオーディションを勝ち抜き、DOPERSにしかないラウドロックをフロアに響かせ、存在感を見せつけた。そんなDOPERSから目を離すな！",
+      "merch": { "start": "11:45", "end": "13:15" },
+      "sns": [ { "type": "instagram", "handle": "dopers_official052" }, { "type": "x", "handle": "DOPERS_official" } ], "notify": true
+    },
+    {
+      "id": "ev-1103-umashikate", "category": "stage", "series": "CHUKYO FES",
+      "date": "2025-11-03", "start": "12:00", "end": "12:40", "venueId": "galleria",
+      "title": "ウマシカて",
+      "description": "2020年に結成し東京を中心に活動するロックバンド。力強い歌声と耳から離れない唯一無二のサウンドが若者から注目を集める。2023年に配信が開始された「1998」は、過去の恋愛を振り返りながら別れた相手への感情を表現し、10代から20代を中心にSNSで話題を呼んだ。名古屋のライブハウスを中心に開催されたサーキット「でらROCK FESTIVAL」や総勢400組の応募から選ばれ、「ムロフェス2025」に出演。ウマシカてを聴けば強くなれる！",
+      "merch": { "start": "13:00", "end": "14:30" },
+      "sns": [ { "type": "instagram", "handle": "umashika_te" }, { "type": "x", "handle": "Umashikate____" } ], "notify": true
+    },
+    {
+      "id": "ev-1103-karaage", "category": "stage", "series": "CHUKYO FES",
+      "date": "2025-11-03", "start": "13:15", "end": "13:55", "venueId": "galleria",
+      "title": "からあげ弁当",
+      "description": "焼きそば(Vo/Gt)、春巻(Ba)、こーたろー(Dr)が力を合わせて営む移動式お弁当屋。2021年末の開店より関西エリアを中心とした出店とサブスク販売に特化。2024年6月にRyu-no.(Gt)を正式採用し、4人新体制にパワーアップ。毎日食べても飽きのこない普遍的な味付けと豊富なトッピングに、お腹だけでなく心まで満たされてしまう中毒者が続出。",
+      "merch": { "start": "14:15", "end": "15:45" },
+      "sns": [ { "type": "instagram", "handle": "atuatu_karagee" }, { "type": "x", "handle": "atuatu_karagee" } ], "notify": true
+    },
+    {
+      "id": "ev-1103-unuseless", "category": "stage", "series": "CHUKYO FES",
+      "date": "2025-11-03", "start": "14:30", "end": "15:10", "venueId": "galleria",
+      "title": "アンユースレス",
+      "description": "大阪発の5人組ポップロックバンド。キャッチーなメロディと歌詞がSNSで話題となった「ポプ」は、多くのリスナーを惹きつけた。一方で、「DAYS」のようなバラードで対照的な一面を見せ、そのギャップに魅了されるファンが続出。昨年から始まった自主企画「アンレスランド」は、回を重ねることに盛り上がりを増し、来場者からは「テーマパークみたいで楽しい!」といった満足度の高い声が寄せられている。",
+      "merch": { "start": "15:30", "end": "17:00" },
+      "sns": [ { "type": "instagram", "handle": "unuseless_band" }, { "type": "x", "handle": "unuseless_band" } ], "notify": true
+    },
+    {
+      "id": "ev-1103-soccer", "category": "sports",
+      "date": "2025-11-03", "start": "10:00", "end": "13:30", "venueId": "ground",
+      "title": "サッカー大会",
+      "description": "ビッッッッッッックリするほど盛り上がる！！！ぜひ来てください！",
+      "reservation": "完全予約制", "notify": true
+    }
+  ],
+
+  "stageInfo": {
+    "merchPlace": "各バンドのグッズ販売場所は、ガレリアステージに向かう階段を下りて右側です。"
+  },
+
+  "projectCategories": [
+    { "id": "classroom", "name": "教室企画" },
+    { "id": "campus", "name": "学校全体" },
+    { "id": "service", "name": "案内・サービス" }
+  ],
+
+  "projects": [
+    {
+      "id": "pj-boardgame", "category": "classroom",
+      "title": "ボードゲーム企画",
+      "location": { "building": "1号館", "floor": "3階", "rooms": ["131", "13A"] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "lastEntry": "16:30" }
+      ],
+      "description": "参加予約・募集はナシ！当日ご来場の方に好きなボードゲームを遊んでいただけます！！ルールを知らなくても大丈夫！！",
+      "highlights": ["オセロ", "将棋", "ナンジャモンジャ", "カタカナーシ", "spot it"],
+      "fukubiki": true
+    },
+    {
+      "id": "pj-mahjong", "category": "classroom",
+      "title": "麻雀大会",
+      "location": { "building": "1号館", "floor": "3階", "rooms": ["13B"] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "note": "3人麻雀" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "note": "4人麻雀（東風戦）" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "note": "4人麻雀（半荘戦）" }
+      ],
+      "description": "中が2翻！？中暗槓で跳満！？中京ローカル役も予定！！",
+      "reservation": "完全予約制"
+    },
+    {
+      "id": "pj-kids", "category": "classroom",
+      "title": "中京キッズワールド（子ども向け企画）",
+      "location": { "building": "1号館", "floor": "4階", "rooms": ["141", "142"] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "lastEntry": "16:30" }
+      ],
+      "description": "迷路・ペットボトルボーリング・ピンポンカップインは終日開催しています！スライムづくり・紙コップ人形作りの工作の企画はなくなり次第終了になります。",
+      "highlights": ["迷路", "ペットボトルボーリング", "ピンポンカップイン", "スライムづくり", "紙コップ人形作り"]
+    },
+    {
+      "id": "pj-ennichi", "category": "classroom",
+      "title": "縁日企画",
+      "location": { "building": "1号館", "floor": "5階", "rooms": ["15A", "15B", "151", "152"] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "lastEntry": "16:30" }
+      ],
+      "description": "懐かしの縁日がキャンパスにやってくる！景品や参加賞（ふくびき券）があります！！みんなが「来てよかった！」って思えるような素敵な時間をお約束します！",
+      "highlights": ["射的", "スーパーボールすくい", "輪投げ", "ピンボール"],
+      "price": "セット売り（500円）のみ",
+      "fukubiki": true
+    },
+    {
+      "id": "pj-parasports", "category": "classroom",
+      "title": "パラスポーツ企画",
+      "location": { "building": "1号館", "floor": "5階", "rooms": ["153"] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "lastEntry": "16:30" }
+      ],
+      "description": "体験しないと、もったいない！思っている3.6倍楽しい！！！ボッチャとモルックができるよ！",
+      "highlights": ["ボッチャ", "モルック"],
+      "fukubiki": true
+    },
+    {
+      "id": "pj-uranai", "category": "classroom",
+      "title": "占い企画",
+      "location": { "building": "1号館", "floor": "6階", "rooms": ["161", "162"], "extra": "4号館3階前（階段近く）" },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "lastEntry": "16:30" }
+      ],
+      "description": "未来占ってみませんか？",
+      "highlights": ["おみくじ", "心理テスト", "タロット占い"],
+      "fukubiki": true
+    },
+    {
+      "id": "pj-banksy", "category": "classroom",
+      "title": "ミュージアム企画〜バンクシーの子〜",
+      "location": { "building": "1号館", "floor": "6階", "rooms": ["163"] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "lastEntry": "16:30" }
+      ],
+      "description": "有名な絵師様に会えるかも!! 様々な方から頂いた作品を展示します。お絵描きスペースや、バンクシーの子の投票をお楽しみ頂けます。",
+      "fukubiki": true
+    },
+    {
+      "id": "pj-museum", "category": "classroom",
+      "title": "中京ミュージアム",
+      "location": { "building": "1号館", "floor": "6階", "rooms": ["16A", "16B"] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "lastEntry": "16:30" }
+      ],
+      "description": "中京大学の歴史の展示を行います。年表に書かれた内容のクイズをクリアし、バンクシーの子企画に参加していただいたら、ふくびき券のプレゼントがございます。たくさんのご参加お待ちしております。",
+      "fukubiki": true
+    },
+    {
+      "id": "pj-haunted", "category": "classroom",
+      "title": "お化け屋敷企画「最恐病棟」",
+      "location": { "building": "1号館", "floor": "7階", "rooms": ["171", "172", "173"] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "lastEntry": "17:00" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "lastEntry": "17:00" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "lastEntry": "16:00" }
+      ],
+      "description": "最終受付時間は各日終了時間の1時間前です。",
+      "price": "1回100円",
+      "fukubiki": true
+    },
+    {
+      "id": "pj-fukubiki", "category": "classroom",
+      "title": "ふくびき企画",
+      "location": { "building": "2号館", "floor": "1階", "rooms": ["アレーナ"] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00", "lastEntry": "17:30" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00", "lastEntry": "16:30" }
+      ],
+      "description": "ふくびき券2枚で1回回せます。対象企画に参加して、ふくびき券をもらってね！！",
+      "targets": ["pj-info", "pj-uranai", "pj-haunted", "pj-rally", "pj-boardgame", "pj-ennichi", "ev-1101-bingo", "pj-banksy", "pj-museum", "pj-parasports"]
+    },
+    {
+      "id": "pj-rally", "category": "campus",
+      "title": "CHUKYO万博 ラリー企画",
+      "location": { "building": "1号館", "floor": "1階", "rooms": [], "extra": "受付：1号館1階" },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "17:30" },
+        { "date": "2025-11-02", "start": "10:00", "end": "17:30" },
+        { "date": "2025-11-03", "start": "10:00", "end": "16:30" }
+      ],
+      "description": "【スタンプラリー】ほかの企画に参加したり大学内をまわってスタンプを集めよう！老若男女誰でも楽しめるよ！\n【クイズラリー】大学内のいろんな場所に問題があるよ！問題の答えをクロスワードに埋めて完成させよう！他の企画に参加しながら挑戦してね！",
+      "highlights": ["スタンプラリー", "クイズラリー"],
+      "fukubiki": true
+    },
+    {
+      "id": "pj-sports-activity", "category": "campus",
+      "title": "スポーツ企画 アクティビティ",
+      "location": { "building": "体育館", "rooms": [] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "16:00" },
+        { "date": "2025-11-02", "start": "10:00", "end": "16:00" },
+        { "date": "2025-11-03", "start": "10:00", "end": "16:00" }
+      ],
+      "description": "アクティビティもあるよ！",
+      "highlights": ["ストラックアウト", "フリースローチャレンジ"]
+    },
+    {
+      "id": "pj-photospot", "category": "campus",
+      "title": "フォトスポット企画",
+      "location": { "building": "学校全体", "rooms": [] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00" }
+      ]
+    },
+    {
+      "id": "pj-booths", "category": "campus",
+      "title": "ブース（模擬店）",
+      "location": { "building": "セントラルプラザほか", "rooms": [] },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "16:00", "lastOrder": "15:45" },
+        { "date": "2025-11-02", "start": "10:00", "end": "16:00", "lastOrder": "15:45" },
+        { "date": "2025-11-03", "start": "10:00", "end": "16:00", "lastOrder": "15:20" }
+      ]
+    },
+    {
+      "id": "pj-info", "category": "service",
+      "title": "案内所",
+      "location": { "building": "学校全体", "rooms": [], "extra": "412教室前・5号館前・1号館前" },
+      "schedule": [
+        { "date": "2025-11-01", "start": "12:00", "end": "18:00" },
+        { "date": "2025-11-02", "start": "10:00", "end": "18:00" },
+        { "date": "2025-11-03", "start": "10:00", "end": "17:00" }
+      ],
+      "fukubiki": true
+    }
+  ],
+
+  "boothAreas": [
+    { "id": "central-plaza", "name": "セントラルプラザ", "map": "images/booth-central-plaza.png", "note": "レッドブル特設ブースあり" },
+    { "id": "b4-1f", "name": "4号館1階", "map": "images/booth-4-1f.png" },
+    { "id": "b0-6f", "name": "0号館6階", "map": "images/booth-0-6f.png" },
+    { "id": "b0-7f", "name": "0号館7階", "map": "images/booth-0-7f.png" },
+    { "id": "b1", "name": "1号館", "map": "images/booth-1.png" },
+    { "id": "b2", "name": "2号館", "map": "images/booth-2.png" },
+    { "id": "b4-3f", "name": "4号館3階", "map": "images/booth-4-3f.png" }
+  ],
+
+  "booths": [
+    { "areaId": "central-plaza", "no": "1", "group": "今井ゼミ", "shop": "今井ゼミ", "items": "おでん", "type": "food" },
+    { "areaId": "central-plaza", "no": "2", "group": "フォーク専科", "shop": "焼き鳥戦火", "items": "焼き鳥", "type": "food" },
+    { "areaId": "central-plaza", "no": "3", "group": "スイーツサークル", "shop": "スイーツサークル", "items": "ドーナツ", "type": "food" },
+    { "areaId": "central-plaza", "no": "4", "group": "ラーメンサークル", "shop": "ラーメンサークル", "items": "ラーメン", "type": "food" },
+    { "areaId": "central-plaza", "no": "5", "group": "小倉ゼミ", "shop": "揚げたこ焼き〜ひとくちで、世界一周!〜", "items": "揚げたこ焼き", "type": "food" },
+    { "areaId": "central-plaza", "no": "6", "group": "G.U.K", "shop": "ポテチキ", "items": "ポテト", "type": "food" },
+    { "areaId": "central-plaza", "no": "7", "group": "中京大学漫画研究会", "shop": "中京大学漫画研究会", "items": "たません・部誌", "type": "food" },
+    { "areaId": "central-plaza", "no": "8", "group": "アカペラサークル楽", "shop": "楽のベビーカステラ", "items": "ベビーカステラ", "type": "food" },
+    { "areaId": "central-plaza", "no": "9", "group": "ひまゆり", "shop": "ひまゆり屋台フランク", "items": "フランクフルト", "type": "food" },
+    { "areaId": "central-plaza", "no": "10", "group": "Do it!", "shop": "Do it! 豚汁堂", "items": "豚汁", "type": "food" },
+    { "areaId": "central-plaza", "no": "11", "group": "中京大学混声合唱団", "shop": "Piu Dolce", "items": "ミニパンケーキ", "type": "food" },
+    { "areaId": "central-plaza", "no": "12", "group": "中京大学学生消防団", "shop": "消防焼きそば119", "items": "焼きそば", "type": "food" },
+    { "areaId": "central-plaza", "no": "13", "group": "Write Delight", "shop": "熱血安旨!!月見牛タンつくね串!!本も売ってるよ!!", "items": "牛タンつくね串・本", "type": "food" },
+    { "areaId": "central-plaza", "no": "14", "group": "生協学生委員会", "shop": "チーズボール共和国", "items": "チーズボール", "type": "food" },
+    { "areaId": "central-plaza", "no": "15", "group": "齋藤由里恵ゼミ", "shop": "ゆりえ's串焼き工房", "items": "焼き鳥・フランクフルト・ミニゲーム", "type": "food" },
+    { "areaId": "central-plaza", "no": "16", "group": "CRUE", "shop": "チュロス天国", "items": "チュロス", "type": "food" },
+    { "areaId": "central-plaza", "no": "17", "group": "法学研究会", "shop": "罪なたこ焼き無罪の旨さ", "items": "揚げたこ焼き串", "type": "food" },
+
+    { "areaId": "b4-1f", "no": "自衛隊出店所", "group": "自衛隊愛知地方協力本部 名古屋出張所", "shop": "自衛隊愛知地方協力本部 名古屋出張所", "items": "自衛隊装備品展示・体験", "type": "experience", "note": "412教室の隣" },
+
+    { "areaId": "b0-6f", "no": "0604", "group": "いかづち", "shop": "劇団いかづち", "items": "公演", "type": "performance" },
+    { "areaId": "b0-6f", "no": "0605", "group": "社会福祉法人AJU自立の家", "shop": "社会福祉法人AJU自立の家", "items": "車いす体験", "type": "experience" },
+    { "areaId": "b0-6f", "no": "0606", "group": "弘中ゼミ", "shop": "弘中Flea Market", "items": "フリーマーケットとして服や雑貨の販売", "type": "shop" },
+    { "areaId": "b0-6f", "no": "0607", "group": "チャレンジ奨学金", "shop": "ひらめきコードラボ", "items": "自作カードゲームの体験会", "type": "experience" },
+    { "areaId": "b0-6f", "no": "0608", "group": "心理学部ダイバーシティ", "shop": "リボンレイ製作体験", "items": "リボンレイを参加者と作成", "type": "experience" },
+    { "areaId": "b0-6f", "no": "06C", "group": "中京大学APP", "shop": "昭和警察in中京", "items": "昭和警察と合同の防犯啓発", "type": "exhibit" },
+
+    { "areaId": "b0-7f", "no": "0701", "group": "CUVE", "shop": "CUVE福祉の家", "items": "ヘルプセンターで販売している焼き菓子やパン、雑貨類の販売", "type": "shop" },
+    { "areaId": "b0-7f", "no": "0702", "group": "Gleam", "shop": "Gleam presents リアル脱出ゲーム（無限城からの脱出）", "items": "リアル脱出ゲーム", "type": "experience" },
+    { "areaId": "b0-7f", "no": "0703", "group": "ディズニーサークル", "shop": "あのテーマパークの味!? すっきりアップルティーソーダ", "items": "ドリンク販売", "type": "food" },
+    { "areaId": "b0-7f", "no": "0704", "group": "中山惠子ゼミナール", "shop": "ツナガルラボ", "items": "謎解き・クイズ、ろう者の疑似体験ができるボードゲーム、ワークショップ", "type": "experience" },
+    { "areaId": "b0-7f", "no": "0705", "group": "模型同好会", "shop": "中京・大同・名経 模型作品展示", "items": "作品展示", "type": "exhibit" },
+    { "areaId": "b0-7f", "no": "0706", "group": "茶道部", "shop": "茶道部甘味処", "items": "既存の抹茶ラテや和菓子、お点前による抹茶提供", "type": "food" },
+    { "areaId": "b0-7f", "no": "07B", "group": "尾和ゼミ", "shop": "百年樹珈琲 from Uganda", "items": "ウガンダについての展示、コーヒーの試飲、コーヒー豆粉の販売", "type": "exhibit" },
+    { "areaId": "b0-7f", "no": "07C", "group": "歴史文化研究会", "shop": "歴史文化研究会", "items": "模造刀などの展示", "type": "exhibit" },
+    { "areaId": "b0-7f", "no": "07D", "group": "カラフル座", "shop": "朗読劇・朗読劇体験", "items": "朗読劇・朗読劇体験", "type": "performance" },
+
+    { "areaId": "b1", "no": "15D", "floor": "5階", "group": "濱田ゼミナール", "shop": "ちゅ〜グッズ 大学オリジナルストア", "items": "ハンカチ・エコバック・個包装のクッキーの販売", "type": "shop" },
+    { "areaId": "b1", "no": "164", "floor": "6階", "group": "光画-photo circle-", "shop": "光画展", "items": "写真の展示", "type": "exhibit" },
+
+    { "areaId": "b2", "no": "223", "floor": "2階", "group": "SOUND NOTE", "shop": "SOUND NOTE", "items": "バンド演奏", "type": "performance" },
+    { "areaId": "b2", "no": "232", "floor": "3階", "group": "中京サイファー", "shop": "ラップ体験会", "items": "参加者とのフリースタイルラップ", "type": "experience" },
+    { "areaId": "b2", "no": "233", "floor": "3階", "group": "文化会和楽部", "shop": "和楽器演奏ブース", "items": "楽器演奏", "type": "performance" },
+    { "areaId": "b2", "no": "241", "floor": "3階", "group": "フォークソングクラブ", "shop": "フォークソングクラブ", "items": "バンド演奏", "type": "performance" },
+
+    { "areaId": "b4-3f", "no": "43A", "group": "kyon", "shop": "kyon", "items": "ヘアアレンジ", "type": "experience" },
+    { "areaId": "b4-3f", "no": "43B", "group": "吹奏楽団", "shop": "トランプゲーム", "items": "トランプゲーム", "type": "experience" },
+    { "areaId": "b4-3f", "no": "43C", "group": "こぐま座", "shop": "プラネタリウムとお菓子", "items": "プラネタリウムとお菓子", "type": "experience" },
+    { "areaId": "b4-3f", "no": "43D", "group": "neopokemology", "shop": "ポケカアカデミーヤゴト", "items": "ポケモンカードの体験会、カードゲーム対戦", "type": "experience" },
+    { "areaId": "b4-3f", "no": "43E", "group": "司会放送部", "shop": "MBTIモクテルBAR", "items": "ノンアルコールカクテルなど", "type": "food" },
+    { "areaId": "b4-3f", "no": "43G", "group": "Chase Used Clothing Store", "shop": "Chase Used Clothing Store", "items": "古着販売", "type": "shop" },
+    { "areaId": "b4-3f", "no": "43H", "group": "VOICE", "shop": "VOICE", "items": "個包装のお菓子", "type": "food" },
+    { "areaId": "b4-3f", "no": "43I", "group": "中村ゼミ", "shop": "スイーツ研究室", "items": "スイーツ、ドリンク（既製品）の提供", "type": "food" }
+  ],
+
+  "campusMap": {
+    "image": "images/campus-map.png",
+    "access": "地下鉄 八事駅5番出口からすぐ",
+    "facilities": [
+      { "type": "info", "name": "案内所", "places": ["412教室前", "5号館前", "1号館前"] },
+      { "type": "entrance", "name": "入口", "places": ["5号館前（八事駅5番出口側）"] },
+      { "type": "exit", "name": "出口", "places": ["1号館前", "6号館側（体育館方面）"] },
+      { "type": "bicycle", "name": "駐輪場", "places": ["0号館と1号館の間"] },
+      { "type": "smoking", "name": "喫煙所", "places": ["2号館・6号館付近"] },
+      { "type": "nursing", "name": "授乳室", "places": ["1号館4階 14A教室"] }
+    ],
+    "diningSpaces": [
+      {
+        "name": "セブンイレブン", "place": "1号館1階",
+        "hours": [
+          { "date": "2025-11-02", "start": "10:00", "end": "18:00" },
+          { "date": "2025-11-03", "start": "10:00", "end": "17:00" }
+        ]
+      },
+      {
+        "name": "CHUKYO Terrace", "place": "0号館2階",
+        "hours": [
+          { "date": "2025-11-02", "start": "11:00", "end": "14:00" },
+          { "date": "2025-11-03", "start": "11:00", "end": "14:00" }
+        ],
+        "note": "Terraceは終日開放"
+      }
+    ],
+    "gymDirections": "1号館・6号館の間を通り、6号館の奥へ進んだ先が体育館です。",
+    "gymDirectionsImage": "images/gym-directions.png"
+  },
+
+  "sponsors": {
+    "donors": [
+      "中京大学サービス株式会社", "株式会社マイナビ", "株式会社学情 名古屋支社", "東海電興株式会社",
+      "名古屋テレビ放送株式会社", "株式会社コスモエージェンシー", "長谷川体育施設株式会社 中部支店",
+      "株式会社河合順蔵商店", "株式会社一誠社", "高村造園株式会社", "株式会社サーティスホテルマネジメント",
+      "リコージャパン株式会社 中部MA事業部", "名古屋銀行 豊田浄水支店", "株式会社錢高組 名古屋支店",
+      "株式会社あいち銀行 八事支店", "株式会社メイテツコム", "合資会社新楽園茶舗", "電子システム株式会社",
+      "麺★丼 YURIN", "スタートアップポップコーン株式会社"
+    ],
+    "ads": [
+      { "id": "ad-redbaron", "name": "レッドバロン", "size": "full", "image": "images/ads/redbaron.png", "url": "https://www.redbaron.co.jp" },
+      { "id": "ad-sunmesse", "name": "サンメッセ株式会社 名古屋支店", "size": "half", "image": "images/ads/sunmesse.png", "url": "https://www.sunmesse.co.jp/" },
+      { "id": "ad-openhouse", "name": "OPEN HOUSE GROUP", "size": "half", "image": "images/ads/openhouse.png" },
+      { "id": "ad-toyota-rl", "name": "トヨタレンタリース名古屋", "size": "full", "image": "images/ads/toyota-rentalease.png" },
+      { "id": "ad-showa-ds", "name": "昭和自動車学校", "size": "full", "image": "images/ads/showa-ds.png" },
+      { "id": "ad-cbc-ds", "name": "CBC自動車学校", "size": "half", "image": "images/ads/cbc-ds.png" },
+      { "id": "ad-syncron", "name": "シンクロンコーワ", "size": "full", "image": "images/ads/syncron-kowa.png" },
+      { "id": "ad-photo-studio", "name": "キャンパス内スタジオ（3号館G階）", "size": "half", "image": "images/ads/campus-studio.png" },
+      { "id": "ad-shoyu", "name": "書遊 名古屋店", "size": "half", "image": "images/ads/shoyu.png" },
+      { "id": "ad-maruzen", "name": "丸善雄松堂株式会社（Maruzen eBook Library）", "size": "half", "image": "images/ads/maruzen.png", "url": "https://elib.maruzen.co.jp/" },
+      { "id": "ad-kinokuniya", "name": "紀伊國屋書店", "size": "half", "image": "images/ads/kinokuniya.png" },
+      { "id": "ad-adachi", "name": "足立工業株式会社", "size": "half", "image": "images/ads/adachi.png" },
+      { "id": "ad-chayagasaka", "name": "茶屋坂自動車学校", "size": "half", "image": "images/ads/chayagasaka.png" },
+      { "id": "ad-arakawa", "name": "荒川印刷", "size": "half", "image": "images/ads/arakawa.png", "url": "https://www.arkw.co.jp" },
+      { "id": "ad-mitani", "name": "三谷商事株式会社", "size": "half", "image": "images/ads/mitani.png" },
+      { "id": "ad-nissho", "name": "ニッショー八事支店", "size": "half", "image": "images/ads/nissho.png" },
+      { "id": "ad-hasetai", "name": "長谷川体育施設株式会社", "size": "half", "image": "images/ads/hasetai.png", "url": "https://www.hasetai.com" },
+      { "id": "ad-coop", "name": "中京大学生活協同組合", "size": "half", "image": "images/ads/coop.png" },
+      { "id": "ad-rec", "name": "株式会社REC 名古屋支店", "size": "full", "image": "images/ads/rec.png" },
+      { "id": "ad-asahi", "name": "朝日工業社", "size": "half", "image": "images/ads/asahi.png" },
+      { "id": "ad-toyota-ds", "name": "豊田自動車学校", "size": "half", "image": "images/ads/toyota-ds.png" },
+      { "id": "ad-electric-sheep", "name": "Electric Sheep（メ〜テレ主催の学生ハッカソン）", "size": "small", "image": "images/ads/electric-sheep.png" },
+      { "id": "ad-nasic", "name": "ナジック学生マンション（学生情報センター）", "size": "small", "image": "images/ads/nasic.png" },
+      { "id": "ad-minimini", "name": "ミニミニ 八事店", "size": "small", "image": "images/ads/minimini.png" },
+      { "id": "ad-mimatsu", "name": "美松花園（花キューピット）", "size": "small", "image": "images/ads/mimatsu.png" },
+      { "id": "ad-ueji", "name": "上地自動車学校", "size": "small", "image": "images/ads/ueji.png" },
+      { "id": "ad-awajishima", "name": "淡路島バーガー 八事店", "size": "small", "image": "images/ads/awajishima-burger.png", "coupon": "平日限定（11月14日まで）「中京祭パンフみたよ〜」でドリンクサービス（バーガー注文時のみ。セットメニューは¥50引き）" },
+      { "id": "ad-nagaya", "name": "長屋印刷株式会社", "size": "small", "image": "images/ads/nagaya.png" },
+      { "id": "ad-meitetsu-ds", "name": "名鉄自動車学校", "size": "small", "image": "images/ads/meitetsu-ds.png" },
+      { "id": "ad-8grapher", "name": "株式会社8grapher", "size": "small", "image": "images/ads/8grapher.png" },
+      { "id": "ad-jiraiya", "name": "地雷也", "size": "small", "image": "images/ads/jiraiya.png" },
+      { "id": "ad-nirinsou", "name": "（株）にりん草", "size": "small", "image": "images/ads/nirinsou.png" },
+      { "id": "ad-brain", "name": "株式会社ブレーンプランニング", "size": "small", "image": "images/ads/brain-planning.png", "url": "https://www.brain-p.co.jp" },
+      { "id": "ad-first", "name": "ファースト接骨院", "size": "small", "image": "images/ads/first-sekkotsuin.png" },
+      { "id": "ad-nagomiya", "name": "串あげ酒場 なごみ家", "size": "small", "image": "images/ads/nagomiya.png", "coupon": "月〜木限定・1日3組最大10名様限定・前日までの予約で3500円→2500円（学祭パンフレット見たでご予約ください／11月末まで）" },
+      { "id": "ad-eibi", "name": "株式会社栄美通信", "size": "small", "image": "images/ads/eibi.png" },
+      { "id": "ad-amanojo", "name": "天乃城", "size": "small", "image": "images/ads/amanojo.png" },
+      { "id": "ad-conecco", "name": "Book Cafe Co-Necco", "size": "small", "image": "images/ads/conecco.png" },
+      { "id": "ad-eikichiya", "name": "二代目 英吉家", "size": "small", "image": "images/ads/eikichiya.png" },
+      { "id": "ad-chunichi-insho", "name": "中日印章 中日ビル店", "size": "small", "image": "images/ads/chunichi-insho.png" }
+    ]
+  },
+
+  "about": {
+    "publisher": "第72回中京大学祭名古屋実行委員会",
+    "afterword": "実行委員の多くは、大学祭当日に来場者の皆さまが楽しんでいる姿を見ることでやりがいを感じ、1年間の準備を頑張っています。本大学祭に足を運び、このパンフレットを手に取ってくださった皆さまが、たくさんの笑顔を見せてくださることを楽しみにしております。多くの人の思いが詰まったこの大学祭が、皆さまにとって素敵な思い出になりますよう、心より願っております。最後までお読みいただき、本当にありがとうございました。",
+    "contact": {
+      "address": "中京大学名古屋キャンパス 4号館3階 中京大学祭名古屋実行委員会分室",
+      "email": "chukyo.gakusai@gmail.com",
+      "website": "https://club.chukyo-u.ac.jp/~gakusai_n/index.html",
+      "instagram": "https://www.instagram.com/chukyo.gakusai/",
+      "x": "https://twitter.com/chukyo_gakusai"
+    }
+  }
+}

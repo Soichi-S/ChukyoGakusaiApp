@@ -1,0 +1,29 @@
+name: chukyo_fes
+description: "中京大学祭 公式パンフレットアプリ"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.6.0
+  shared_preferences: ^2.5.5
+  url_launcher: ^6.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  # data/ は年度ごとのコンテンツ。ネットから取得できない時のフォールバックとして同梱する。
+  # 年度を追加したら、その年度のフォルダもここに追記する。
+  assets:
+    - data/
+    - data/2025/
+    - data/2025/images/

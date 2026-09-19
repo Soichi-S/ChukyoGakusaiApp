@@ -1,0 +1,62 @@
+# main に push されたら Web 版をビルドして GitHub Pages に公開する。
+# data/ もサイトに同梱し、アプリはそこから最新データを読む（DATA_BASE_URL）。
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  BASE_HREF: /ChukyoGakusaiApp/
+  DATA_BASE_URL: https://soichi-s.github.io/ChukyoGakusaiApp/data/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter analyze
+
+      - name: Build web
+        run: >
+          flutter build web --release
+          --base-href "$BASE_HREF"
+          --dart-define=DATA_BASE_URL="$DATA_BASE_URL"
+
+      - name: Publish data/ next to the app
+        run: |
+          mkdir -p build/web/data
+          cp -r data/. build/web/data/
+          rm -f build/web/data/README.md
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
