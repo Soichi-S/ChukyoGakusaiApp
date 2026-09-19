@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models.dart';
 import '../widgets.dart';
+import 'map_screen.dart';
 
 class EventDetailScreen extends StatelessWidget {
   final FestivalEvent event;
@@ -50,6 +51,7 @@ class EventDetailScreen extends StatelessWidget {
           InfoRow(Icons.schedule, '${day?.label ?? event.date}　${event.timeLabel}'),
           if (event.doorsOpen != null) InfoRow(Icons.door_front_door_outlined, '開場 ${event.doorsOpen}'),
           if (venue != null) InfoRow(Icons.place_outlined, venue.fullName),
+          Align(alignment: Alignment.centerLeft, child: GymDirectionsButton(venueId: event.venueId)),
           if (event.reservation != null) InfoRow(Icons.event_available, event.reservation!),
           if (event.ticketText != null) InfoRow(Icons.confirmation_number_outlined, event.ticketText!),
           if (event.merch != null)

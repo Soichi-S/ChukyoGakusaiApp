@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models.dart';
 import '../widgets.dart';
+import 'map_screen.dart';
 
 class ProjectDetailScreen extends StatelessWidget {
   final Project project;
@@ -28,6 +29,7 @@ class ProjectDetailScreen extends StatelessWidget {
           ]),
           const SizedBox(height: 12),
           InfoRow(Icons.place_outlined, project.locationLabel),
+          Align(alignment: Alignment.centerLeft, child: GymDirectionsButton(venueId: project.venueId)),
           const SizedBox(height: 8),
           Card(
             child: Padding(

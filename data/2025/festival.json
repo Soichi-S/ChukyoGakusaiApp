@@ -92,8 +92,8 @@
   "venues": [
     { "id": "galleria", "name": "ガレリアステージ", "building": "0号館", "note": "中京フェス・ボーカルコンテスト・クイズ企画の会場" },
     { "id": "seimei-hall", "name": "清明ホール", "building": "1号館", "floor": "3階" },
-    { "id": "gym", "name": "体育館", "note": "6号館の奥。キャンパスマップの「体育館への行き方」を参照" },
-    { "id": "ground", "name": "グラウンド" },
+    { "id": "gym", "name": "体育館", "showGymDirections": true },
+    { "id": "ground", "name": "グラウンド", "showGymDirections": true },
     { "id": "room-431", "name": "431教室", "building": "4号館", "floor": "3階" },
     { "id": "arena", "name": "アレーナ", "building": "2号館", "floor": "1階" },
     { "id": "central-plaza", "name": "セントラルプラザ" },
@@ -434,7 +434,7 @@
     {
       "id": "pj-sports-activity", "category": "campus",
       "title": "スポーツ企画 アクティビティ",
-      "location": { "building": "体育館", "rooms": [] },
+      "location": { "building": "体育館", "rooms": [], "venueId": "gym" },
       "schedule": [
         { "date": "2025-11-01", "start": "12:00", "end": "16:00" },
         { "date": "2025-11-02", "start": "10:00", "end": "16:00" },

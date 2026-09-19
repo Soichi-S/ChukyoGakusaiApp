@@ -129,12 +129,16 @@ class Venue {
   final String? floor;
   final String? note;
 
+  /// 詳細画面に「体育館への行き方」への導線を出すか
+  final bool showGymDirections;
+
   Venue.fromJson(Json j)
       : id = j['id'],
         name = j['name'],
         building = j['building'],
         floor = j['floor'],
-        note = j['note'];
+        note = j['note'],
+        showGymDirections = j['showGymDirections'] ?? false;
 
   String get fullName =>
       [building, floor, name].whereType<String>().join(' ');
@@ -268,6 +272,9 @@ class Project {
   final String? floor;
   final List<String> rooms;
   final String? locationExtra;
+
+  /// 会場が venues にある場合（体育館など）の ID
+  final String? venueId;
   final List<ProjectSession> schedule;
   final String? description;
   final List<String> highlights;
@@ -284,6 +291,7 @@ class Project {
         floor = j['location']?['floor'],
         rooms = _strings(j['location']?['rooms']),
         locationExtra = j['location']?['extra'],
+        venueId = j['location']?['venueId'],
         schedule = _list(j['schedule'], ProjectSession.fromJson),
         description = j['description'],
         highlights = _strings(j['highlights']),

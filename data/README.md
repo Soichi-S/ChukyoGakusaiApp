@@ -43,6 +43,8 @@ data/
 ```
 
 - 時刻は `"HH:mm"`（日本時間）。
+- `venues` に `"showGymDirections": true` を付けた会場（体育館・グラウンド）の企画は、
+  詳細画面に「体育館への行き方を見る」ボタンが出る。`projects` の場合は `location.venueId` で会場を指定する。
 - 出演が取り消しになったら、項目を消さずに `status: "cancelled"` を付け、`notices` にお知らせを追加する。
 
 ## 毎年の更新手順

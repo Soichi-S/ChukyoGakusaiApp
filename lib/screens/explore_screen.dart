@@ -15,7 +15,12 @@ class ExploreScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('企画・ブース'),
-          bottom: const TabBar(tabs: [Tab(text: '企画'), Tab(text: 'ブース')]),
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: '企画'),
+              Tab(text: 'ブース'),
+            ],
+          ),
         ),
         body: const TabBarView(children: [_ProjectList(), _BoothList()]),
       ),
@@ -34,7 +39,8 @@ class _ProjectList extends StatelessWidget {
       children: [
         for (final c in festival.projectCategories) ...[
           SectionTitle(c.name),
-          for (final p in festival.projects.where((p) => p.category == c.id)) _ProjectCard(p),
+          for (final p in festival.projects.where((p) => p.category == c.id))
+            _ProjectCard(p),
         ],
       ],
     );
@@ -51,19 +57,28 @@ class _ProjectCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: ListTile(
-        title: Text(project.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          project.title,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(project.locationLabel),
             if (project.highlights.isNotEmpty)
-              Text(project.highlights.join('・'),
-                  maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 12)),
+              Text(
+                project.highlights.join('・'),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 12),
+              ),
           ],
         ),
         trailing: const Icon(Icons.chevron_right),
         onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => ProjectDetailScreen(project: project)),
+          MaterialPageRoute(
+            builder: (_) => ProjectDetailScreen(project: project),
+          ),
         ),
       ),
     );
@@ -77,32 +92,58 @@ class _BoothList extends StatefulWidget {
   State<_BoothList> createState() => _BoothListState();
 }
 
-class _BoothListState extends State<_BoothList> {
+// 検索窓と絞り込みは一覧の上に固定し、入力内容は controller で保持する。
+// （一覧の中に置くと、スクロールで画面外に出た時に破棄されて入力が消える）
+class _BoothListState extends State<_BoothList>
+    with AutomaticKeepAliveClientMixin {
+  final _search = TextEditingController();
   String? _areaId;
-  String _query = '';
+
+  @override
+  bool get wantKeepAlive => true; // 企画タブと行き来しても検索状態を残す
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final festival = FestivalScope.festivalOf(context);
     final area = festival.boothAreas.where((a) => a.id == _areaId).firstOrNull;
     final booths = festival.booths
-        .where((b) => (_areaId == null || b.areaId == _areaId) && b.matches(_query))
+        .where(
+          (b) =>
+              (_areaId == null || b.areaId == _areaId) &&
+              b.matches(_search.text),
+        )
         .toList();
-    final hours = festival.projects.where((p) => p.id == 'pj-booths').firstOrNull;
+    final hours = festival.projects
+        .where((p) => p.id == 'pj-booths')
+        .firstOrNull;
 
-    return ListView(
-      padding: const EdgeInsets.only(bottom: 24),
+    return Column(
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
           child: TextField(
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search),
+            controller: _search,
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.search),
               hintText: '食べ物・団体名で探す（例：たこ焼き）',
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               isDense: true,
+              suffixIcon: _search.text.isEmpty
+                  ? null
+                  : IconButton(
+                      icon: const Icon(Icons.clear),
+                      tooltip: 'クリア',
+                      onPressed: () => setState(_search.clear),
+                    ),
             ),
-            onChanged: (v) => setState(() => _query = v),
+            onChanged: (_) => setState(() {}),
           ),
         ),
         SingleChildScrollView(
@@ -127,28 +168,46 @@ class _BoothListState extends State<_BoothList> {
             ],
           ),
         ),
-        if (hours != null && (_areaId == null || _areaId == 'central-plaza'))
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
-            child: InfoRow(
-              Icons.schedule,
-              '模擬店の営業時間\n${hours.schedule.map((s) => '${festival.edition.day(s.date)?.shortLabel} ${s.label}').join('\n')}',
-            ),
+        const Divider(height: 1),
+        Expanded(
+          child: ListView(
+            padding: const EdgeInsets.only(bottom: 24),
+            children: [
+              if (hours != null &&
+                  (_areaId == null || _areaId == 'central-plaza'))
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+                  child: InfoRow(
+                    Icons.schedule,
+                    '模擬店の営業時間\n${hours.schedule.map((s) => '${festival.edition.day(s.date)?.shortLabel} ${s.label}').join('\n')}',
+                  ),
+                ),
+              if (area?.map != null)
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: InteractiveViewer(
+                      maxScale: 4,
+                      child: FestivalImage(area!.map!),
+                    ),
+                  ),
+                ),
+              if (booths.isEmpty)
+                const Padding(
+                  padding: EdgeInsets.all(32),
+                  child: Center(child: Text('該当するブースがありません')),
+                ),
+              for (final b in booths)
+                _BoothTile(
+                  b,
+                  areaName: festival.boothAreas
+                      .firstWhere((a) => a.id == b.areaId)
+                      .name,
+                ),
+            ],
           ),
-        if (area?.map != null)
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Card(
-              clipBehavior: Clip.antiAlias,
-              child: InteractiveViewer(maxScale: 4, child: FestivalImage(area!.map!)),
-            ),
-          ),
-        if (booths.isEmpty)
-          const Padding(
-            padding: EdgeInsets.all(32),
-            child: Center(child: Text('該当するブースがありません')),
-          ),
-        for (final b in booths) _BoothTile(b, areaName: festival.boothAreas.firstWhere((a) => a.id == b.areaId).name),
+        ),
       ],
     );
   }
@@ -174,11 +233,20 @@ class _BoothTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
-          isNumber ? '#${booth.no}' : (booth.no.length > 5 ? booth.no.substring(0, 3) : booth.no),
-          style: TextStyle(fontWeight: FontWeight.bold, color: scheme.onPrimaryContainer, fontSize: 13),
+          isNumber
+              ? '#${booth.no}'
+              : (booth.no.length > 5 ? booth.no.substring(0, 3) : booth.no),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: scheme.onPrimaryContainer,
+            fontSize: 13,
+          ),
         ),
       ),
-      title: Text(booth.shop, style: const TextStyle(fontWeight: FontWeight.bold)),
+      title: Text(
+        booth.shop,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -189,8 +257,10 @@ class _BoothTile extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Tag(booth.typeLabel),
-              Text('${booth.group}・$areaName${booth.floor == null ? '' : ' ${booth.floor}'}',
-                  style: const TextStyle(fontSize: 12)),
+              Text(
+                '${booth.group}・$areaName${booth.floor == null ? '' : ' ${booth.floor}'}',
+                style: const TextStyle(fontSize: 12),
+              ),
             ],
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models.dart';
+import '../schedule_chart.dart';
 import '../time_utils.dart';
 import '../widgets.dart';
 import 'project_detail_screen.dart';
@@ -97,6 +98,9 @@ class _ProjectHours extends StatelessWidget {
     final festival = FestivalScope.festivalOf(context);
     final open = festival.projects.where((p) => p.sessionOn(day.date) != null).toList()
       ..sort((a, b) => a.sessionOn(day.date)!.start.compareTo(b.sessionOn(day.date)!.start));
+    void showDetail(Project p) => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => ProjectDetailScreen(project: p)),
+        );
 
     return ListView(
       padding: const EdgeInsets.only(bottom: 24),
@@ -106,15 +110,16 @@ class _ProjectHours extends StatelessWidget {
           child: Text('${day.label}　開場 ${day.open}〜${day.close}',
               style: Theme.of(context).textTheme.bodySmall),
         ),
+        const SectionTitle('タイムテーブル図'),
+        ScheduleChart(date: day.date, projects: open, onTap: showDetail),
+        const SectionTitle('一覧'),
         for (final p in open)
           ListTile(
             title: Text(p.title),
             subtitle: Text('${p.sessionOn(day.date)!.label}\n${p.locationLabel}'),
             isThreeLine: true,
             trailing: const Icon(Icons.chevron_right),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => ProjectDetailScreen(project: p)),
-            ),
+            onTap: () => showDetail(p),
           ),
       ],
     );

@@ -160,16 +160,21 @@ class EventTile extends StatelessWidget {
         )),
         child: Opacity(
           opacity: muted ? 0.5 : 1,
-          child: IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
+          // 左端の色帯は border で描く（IntrinsicHeight は Wrap の高さを誤計算し、2行タイトルで下が切れるため使わない）
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border(
+                left: BorderSide(
                   width: 6,
                   color: timing == EventTiming.live && !event.isCancelled
                       ? scheme.secondary
                       : scheme.primary.withValues(alpha: 0.35),
                 ),
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 SizedBox(
                   width: 72,
                   child: Padding(

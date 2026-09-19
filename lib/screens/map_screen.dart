@@ -67,19 +67,76 @@ class MapScreen extends StatelessWidget {
                 ],
                 if (map.gymDirections != null || map.gymDirectionsImage != null) ...[
                   const SectionTitle('体育館への行き方'),
-                  if (map.gymDirections != null)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(map.gymDirections!),
-                    ),
-                  if (map.gymDirectionsImage != null)
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: FestivalImage(map.gymDirectionsImage!, height: 260),
-                    ),
+                  const _GymDirections(),
                 ],
               ],
             ),
+    );
+  }
+}
+
+class _GymDirections extends StatelessWidget {
+  const _GymDirections();
+
+  @override
+  Widget build(BuildContext context) {
+    final map = FestivalScope.festivalOf(context).campusMap;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (map?.gymDirections != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(map!.gymDirections!, style: const TextStyle(height: 1.6)),
+          ),
+        if (map?.gymDirectionsImage != null)
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: InteractiveViewer(maxScale: 4, child: FestivalImage(map!.gymDirectionsImage!, height: 320)),
+          ),
+      ],
+    );
+  }
+}
+
+class GymDirectionsScreen extends StatelessWidget {
+  const GymDirectionsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('体育館への行き方')),
+      body: ListView(
+        padding: const EdgeInsets.only(top: 16, bottom: 24),
+        children: const [_GymDirections()],
+      ),
+    );
+  }
+}
+
+/// 会場が体育館・グラウンドの企画の詳細画面に出す「体育館への行き方」ボタン。
+/// 会場データの showGymDirections が true の時だけ表示する。
+class GymDirectionsButton extends StatelessWidget {
+  final String? venueId;
+
+  const GymDirectionsButton({super.key, required this.venueId});
+
+  @override
+  Widget build(BuildContext context) {
+    final festival = FestivalScope.festivalOf(context);
+    final venue = venueId == null ? null : festival.venue(venueId!);
+    final map = festival.campusMap;
+    if (venue == null || !venue.showGymDirections) return const SizedBox();
+    if (map?.gymDirections == null && map?.gymDirectionsImage == null) return const SizedBox();
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: OutlinedButton.icon(
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const GymDirectionsScreen()),
+        ),
+        icon: const Icon(Icons.directions_walk),
+        label: const Text('体育館への行き方を見る'),
+      ),
     );
   }
 }
