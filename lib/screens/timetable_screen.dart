@@ -86,28 +86,47 @@ class _EventList extends StatelessWidget {
     // 会場ごとにまとめる（ガレリアステージ・清明ホール・体育館…）
     final venueIds = <String>{for (final e in events) e.venueId};
 
-    // パンフレットの「ステージ企画タイムテーブル」に相当する図。1件ずつ描く。
-    final items = [
-      for (final e in events.where((e) => !e.isCancelled))
-        ChartItem.fromEvent(
-          e,
-          () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => EventDetailScreen(event: e)),
-          ),
-        ),
-    ];
-
     return ListView(
       padding: const EdgeInsets.only(bottom: 24),
       children: [
-        const SectionTitle('タイムテーブル図'),
-        ScheduleChart(date: day.date, items: items),
         for (final id in venueIds) ...[
           SectionTitle(festival.venue(id)?.fullName ?? id),
-          for (final e in events.where((e) => e.venueId == id)) EventTile(e),
+          ..._venueSection(
+            context,
+            day,
+            events.where((e) => e.venueId == id).toList(),
+          ),
         ],
       ],
     );
+  }
+
+  /// 会場ごとの「タイムテーブル図 → 各詳細」。
+  /// その日その会場での開催が1件だけなら、図は出さない（ガレリアステージ以外はたいてい1件）。
+  List<Widget> _venueSection(
+    BuildContext context,
+    FestivalDay day,
+    List<FestivalEvent> events,
+  ) {
+    final shown = events.where((e) => !e.isCancelled).toList();
+    return [
+      if (shown.length > 1)
+        ScheduleChart(
+          date: day.date,
+          items: [
+            for (final e in shown)
+              ChartItem.fromEvent(
+                e,
+                () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => EventDetailScreen(event: e),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      for (final e in events) EventTile(e),
+    ];
   }
 }
 
