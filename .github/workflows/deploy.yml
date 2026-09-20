@@ -36,6 +36,7 @@ jobs:
 
       - run: flutter pub get
       - run: flutter analyze
+      - run: flutter test
 
       - name: Build web
         run: >
@@ -58,7 +59,8 @@ jobs:
             flutter build web --release \
               --base-href "${BASE_HREF}$1/" \
               --dart-define=DATA_BASE_URL="$DATA_BASE_URL" \
-              --dart-define=DEBUG_NOW="$2"
+              --dart-define=DEBUG_NOW="$2" \
+              --dart-define=ALLOW_TIME_OVERRIDE=true
             mkdir -p "site/$1"
             cp -r build/web/. "site/$1/"
           }

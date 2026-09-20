@@ -94,8 +94,30 @@ iOS 版のビルドには Mac（Xcode）またはクラウドビルド（Codemag
 ## 公開
 
 `main` に push すると [.github/workflows/deploy.yml](.github/workflows/deploy.yml) が動き、
-Web版と `data/` を GitHub Pages に公開する。確認用ページの固定日時は、このファイルの
-`PREVIEW_NOW` / `PREVIEW_BEFORE_NOW` で変更する。
+テストを実行してから、Web版と `data/` を GitHub Pages に公開する。
+確認用ページの初期の日時は、このファイルの `PREVIEW_NOW` / `PREVIEW_BEFORE_NOW` で変更する。
+
+### 確認用ページの日時の切り替え
+
+確認用ページ（`/preview/`・`/preview-before/`）では、画面上部の帯から**日付と時刻を選び直せる**。
+「解除」を押すと実際の日時に戻る。URL で直接指定することもでき、そのURLはそのまま共有できる。
+
+```
+https://soichi-s.github.io/ChukyoGakusaiApp/preview/?now=2025-11-03T10:50
+```
+
+この切り替えは `--dart-define=ALLOW_TIME_OVERRIDE=true` を付けたビルドでのみ有効。
+本番URLとストア配布版には機能ごと入らないため、来場者には見えない。
+TestFlight や Google Play の内部テストに配るビルドで使いたいときは、同じ指定を付けてビルドする。
+
+## テスト
+
+```bash
+flutter test
+```
+
+日付による画面の切り替わり（開催前・開催中・開催後）と、確認用の日時切り替えを検証している。
+push すると GitHub Actions でも自動で実行される。
 
 ```bash
 git add -A

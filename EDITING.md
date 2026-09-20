@@ -60,7 +60,9 @@ JSON からファイル名で参照する。
 |---|---|
 | データの取得元・保存（オフライン対応） | [lib/repository.dart](lib/repository.dart) |
 | JSON の項目を増やす | [lib/models.dart](lib/models.dart) …追加後、上の画面ファイルで表示する |
-| 「今」の判定、確認用の日時固定 | [lib/time_utils.dart](lib/time_utils.dart) |
+| 「今」の判定、確認用の日時切り替え | [lib/time_utils.dart](lib/time_utils.dart) |
+| 確認用の帯（日時の変更・解除） | [lib/preview_banner.dart](lib/preview_banner.dart) |
+| 日付による表示の自動テスト | [test/](test/) …`flutter test` で実行 |
 
 ### アプリ名・アイコンなど
 

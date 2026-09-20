@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../preview_banner.dart';
 import '../repository.dart';
 import '../widgets.dart';
 
@@ -48,6 +49,7 @@ class InfoScreen extends StatelessWidget {
             onTap: () => push(const AboutScreen()),
           ),
           const Divider(),
+          const PreviewClockButton(),
           Padding(
             padding: const EdgeInsets.all(16),
             child: Text(

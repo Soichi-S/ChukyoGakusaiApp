@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'preview_banner.dart';
 import 'repository.dart';
+import 'time_utils.dart';
 import 'screens/explore_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/info_screen.dart';
@@ -9,6 +11,7 @@ import 'screens/timetable_screen.dart';
 import 'widgets.dart';
 
 void main() {
+  initPreviewClock();
   runApp(const FestivalApp());
 }
 
@@ -142,7 +145,21 @@ class _ShellState extends State<_Shell> {
       const InfoScreen(),
     ];
     return Scaffold(
-      body: IndexedStack(index: _tab, children: pages),
+      // 日時を切り替えたら画面全体を作り直す（各画面が jstNow() を見ているため）
+      body: ValueListenableBuilder<DateTime?>(
+        valueListenable: previewClock,
+        builder: (context, clock, _) => Column(
+          children: [
+            const PreviewBanner(),
+            Expanded(
+              child: KeyedSubtree(
+                key: ValueKey(clock),
+                child: IndexedStack(index: _tab, children: pages),
+              ),
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _tab,
         onDestinationSelected: (i) => setState(() => _tab = i),
