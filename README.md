@@ -43,6 +43,16 @@ flutter run -d chrome --dart-define=DEBUG_NOW=2025-11-02T13:55
 flutter run -d chrome --dart-define=DATA_BASE_URL=https://example.github.io/chukyo-fes-data/
 ```
 
+## 公開URL
+
+| URL | 日時 | 用途 |
+|---|---|---|
+| https://soichi-s.github.io/ChukyoGakusaiApp/ | 実際の日時 | 本番 |
+| https://soichi-s.github.io/ChukyoGakusaiApp/preview/ | 11/2 13:55 固定 | 開催中の表示確認 |
+| https://soichi-s.github.io/ChukyoGakusaiApp/preview-before/ | 10/25 12:00 固定 | 開催前の表示確認 |
+
+固定する日時は `.github/workflows/deploy.yml` の `PREVIEW_NOW` / `PREVIEW_BEFORE_NOW` で変更する。
+
 ## ビルド
 
 ```bash
