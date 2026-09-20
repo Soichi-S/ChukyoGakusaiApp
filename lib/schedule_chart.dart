@@ -258,6 +258,10 @@ class ScheduleChart extends StatelessWidget {
 
   Widget _legend(BuildContext context) {
     final color = _colorFor(context, 'classroom');
+    // 図に出ている種類の凡例だけを表示する
+    final hasProject = items.any((i) => i.kind != 'event');
+    final hasEvent = items.any((i) => i.kind == 'event');
+    final hasCutoff = items.any((i) => i.cutoff != null);
     Widget swatch(Color c) => Container(
       width: 16,
       height: 10,
@@ -274,30 +278,33 @@ class ScheduleChart extends StatelessWidget {
         runSpacing: 4,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              swatch(color),
-              const SizedBox(width: 4),
-              const Text('企画（受付中）', style: style),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              swatch(_colorFor(context, 'event')),
-              const SizedBox(width: 4),
-              const Text('ステージ・大会', style: style),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              swatch(color.withValues(alpha: 0.35)),
-              const SizedBox(width: 4),
-              const Text('最終受付・L.O.後', style: style),
-            ],
-          ),
+          if (hasProject)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                swatch(color),
+                const SizedBox(width: 4),
+                Text(hasEvent ? '企画（受付中）' : '受付中', style: style),
+              ],
+            ),
+          if (hasEvent && hasProject)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                swatch(_colorFor(context, 'event')),
+                const SizedBox(width: 4),
+                const Text('ステージ・大会', style: style),
+              ],
+            ),
+          if (hasCutoff)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                swatch(color.withValues(alpha: 0.35)),
+                const SizedBox(width: 4),
+                const Text('最終受付・L.O.後', style: style),
+              ],
+            ),
           if (jstDateString(jstNow()) == date)
             Row(
               mainAxisSize: MainAxisSize.min,

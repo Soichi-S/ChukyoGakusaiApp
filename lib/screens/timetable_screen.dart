@@ -57,7 +57,13 @@ class _TimetableScreenState extends State<TimetableScreen> {
               child: TabBarView(
                 children: [
                   for (final d in days)
-                    _showProjects ? _ProjectHours(day: d) : _EventList(day: d),
+                    _showProjects
+                        ? _ProjectHours(
+                            day: d,
+                            onShowStage: () =>
+                                setState(() => _showProjects = false),
+                          )
+                        : _EventList(day: d),
                 ],
               ),
             ),
@@ -76,21 +82,40 @@ class _EventList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final festival = FestivalScope.festivalOf(context);
-    // 会場ごとに分けると後ろの会場（清明ホール・4号館など）が埋もれるため、時刻順に一本で並べる。
-    // 会場名は各カードに表示している。
     final events = festival.eventsOn(day.date);
+    // 会場ごとにまとめる（ガレリアステージ・清明ホール・体育館…）
+    final venueIds = <String>{for (final e in events) e.venueId};
+
+    // パンフレットの「ステージ企画タイムテーブル」に相当する図。1件ずつ描く。
+    final items = [
+      for (final e in events.where((e) => !e.isCancelled))
+        ChartItem.fromEvent(
+          e,
+          () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => EventDetailScreen(event: e)),
+          ),
+        ),
+    ];
 
     return ListView(
-      padding: const EdgeInsets.only(top: 8, bottom: 24),
-      children: [for (final e in events) EventTile(e)],
+      padding: const EdgeInsets.only(bottom: 24),
+      children: [
+        const SectionTitle('タイムテーブル図'),
+        ScheduleChart(date: day.date, items: items),
+        for (final id in venueIds) ...[
+          SectionTitle(festival.venue(id)?.fullName ?? id),
+          for (final e in events.where((e) => e.venueId == id)) EventTile(e),
+        ],
+      ],
     );
   }
 }
 
 class _ProjectHours extends StatelessWidget {
   final FestivalDay day;
+  final VoidCallback onShowStage;
 
-  const _ProjectHours({required this.day});
+  const _ProjectHours({required this.day, required this.onShowStage});
 
   @override
   Widget build(BuildContext context) {
@@ -107,18 +132,37 @@ class _ProjectHours extends StatelessWidget {
       context,
     ).push(MaterialPageRoute(builder: (_) => ProjectDetailScreen(project: p)));
 
-    // 図にはステージ・大会などの時刻指定イベントも含める（パンフレットの全体タイムテーブルと同じ）。
-    // 中止のイベントは「ステージ・大会」の一覧に中止として出るため、図には描かない。
+    // パンフレットの「全体タイムテーブル」と同じ構成にする。
+    // 中京フェスのような連続したステージ企画は、1件ずつではなくまとめて1行にする
+    // （1件ずつの図は「ステージ・大会」側にある）。中止のイベントは描かない。
+    final events = festival
+        .eventsOn(day.date)
+        .where((e) => !e.isCancelled)
+        .toList();
     final items = <ChartItem>[
       for (final p in open)
         ChartItem.fromProject(p, p.sessionOn(day.date)!, () => showDetail(p)),
-      for (final e in festival.eventsOn(day.date).where((e) => !e.isCancelled))
-        ChartItem.fromEvent(
-          e,
-          () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => EventDetailScreen(event: e)),
+      for (final MapEntry(key: series, value: group) in _groupBySeries(
+        events,
+      ).entries)
+        if (series == null)
+          for (final e in group)
+            ChartItem.fromEvent(
+              e,
+              () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => EventDetailScreen(event: e)),
+              ),
+            )
+        else
+          ChartItem(
+            title: series,
+            start: group.first.start,
+            end: group
+                .map((e) => e.end ?? e.start)
+                .reduce((a, b) => a.compareTo(b) >= 0 ? a : b),
+            kind: 'event',
+            onTap: onShowStage,
           ),
-        ),
     ]..sort((a, b) => a.start.compareTo(b.start));
 
     return ListView(
@@ -146,5 +190,15 @@ class _ProjectHours extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  /// series（中京フェスなど）ごとにまとめる。series がないイベントは null のグループに入れ、
+  /// 1件ずつ描く。並び順は開始時刻順を保つ。
+  Map<String?, List<FestivalEvent>> _groupBySeries(List<FestivalEvent> events) {
+    final grouped = <String?, List<FestivalEvent>>{};
+    for (final e in events) {
+      grouped.putIfAbsent(e.series, () => []).add(e);
+    }
+    return grouped;
   }
 }
