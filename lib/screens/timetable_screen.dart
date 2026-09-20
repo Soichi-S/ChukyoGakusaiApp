@@ -83,8 +83,13 @@ class _EventList extends StatelessWidget {
   Widget build(BuildContext context) {
     final festival = FestivalScope.festivalOf(context);
     final events = festival.eventsOn(day.date);
-    // 会場ごとにまとめる（ガレリアステージ・清明ホール・体育館…）
-    final venueIds = <String>{for (final e in events) e.venueId};
+    // 会場ごとにまとめる。並び順は festival.json の venues の順（先頭がガレリアステージ）。
+    // venues にない会場は最後にまわす。
+    final order = [for (final v in festival.venues) v.id];
+    int rank(String id) =>
+        order.contains(id) ? order.indexOf(id) : order.length;
+    final venueIds = <String>{for (final e in events) e.venueId}.toList()
+      ..sort((a, b) => rank(a).compareTo(rank(b)));
 
     return ListView(
       padding: const EdgeInsets.only(bottom: 24),
