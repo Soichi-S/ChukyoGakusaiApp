@@ -1,5 +1,8 @@
 # 大学祭アプリ コンテンツデータ
 
+「どの内容がどのファイルにあるか」の早見表は [../EDITING.md](../EDITING.md)。
+環境の準備や公開方法は [../README.md](../README.md)。ここでは JSON の書き方を説明する。
+
 アプリは起動時に `index.json` を読み、`currentYear` の年度フォルダにある `festival.json` を表示する。
 画像パスは `festival.json` と同じフォルダ（例: `2025/`）からの相対パス。
 
