@@ -5,19 +5,52 @@ import 'package:flutter/material.dart';
 import 'models.dart';
 import 'time_utils.dart';
 
-/// 1日分の企画の開催時間を、横棒のタイムテーブル図で描く。
+/// タイムテーブル図の1行。企画（終日）とイベント（時刻指定）の両方を表す。
+class ChartItem {
+  final String title;
+  final String start;
+
+  /// 終了時刻。未定（「16:00〜」など）の場合は null
+  final String? end;
+
+  /// 最終受付・ラストオーダー。以降は薄い色で描く
+  final String? cutoff;
+
+  /// 色分けの種類（projects の category、または 'event'）
+  final String kind;
+  final VoidCallback onTap;
+
+  const ChartItem({
+    required this.title,
+    required this.start,
+    required this.end,
+    this.cutoff,
+    required this.kind,
+    required this.onTap,
+  });
+
+  ChartItem.fromProject(Project p, ProjectSession s, this.onTap)
+    : title = p.title,
+      start = s.start,
+      end = s.end,
+      cutoff = s.lastEntry ?? s.lastOrder,
+      kind = p.category;
+
+  ChartItem.fromEvent(FestivalEvent e, this.onTap)
+    : title = e.title,
+      start = e.start,
+      end = e.end,
+      cutoff = null,
+      kind = 'event';
+}
+
+/// 1日分の開催時間を、横棒のタイムテーブル図で描く。
 /// パンフレットの「全体タイムテーブル」に相当。
 class ScheduleChart extends StatelessWidget {
   final String date;
-  final List<Project> projects;
-  final void Function(Project) onTap;
+  final List<ChartItem> items;
 
-  const ScheduleChart({
-    super.key,
-    required this.date,
-    required this.projects,
-    required this.onTap,
-  });
+  const ScheduleChart({super.key, required this.date, required this.items});
 
   static const _labelWidth = 104.0;
   static const _rowHeight = 36.0;
@@ -30,12 +63,13 @@ class ScheduleChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sessions = [for (final p in projects) p.sessionOn(date)!];
-    if (sessions.isEmpty) return const SizedBox();
+    if (items.isEmpty) return const SizedBox();
+    // 終了時刻が未定の行は 1 時間の長さとして描く
+    int endOf(ChartItem i) =>
+        i.end == null ? _minutes(i.start) + 60 : _minutes(i.end!);
     final firstHour =
-        sessions.map((s) => _minutes(s.start)).reduce(math.min) ~/ 60;
-    final lastHour =
-        (sessions.map((s) => _minutes(s.end)).reduce(math.max) + 59) ~/ 60;
+        items.map((i) => _minutes(i.start)).reduce(math.min) ~/ 60;
+    final lastHour = (items.map(endOf).reduce(math.max) + 59) ~/ 60;
     final hours = lastHour - firstHour;
 
     final now = jstNow();
@@ -100,8 +134,8 @@ class ScheduleChart extends StatelessWidget {
         );
 
         final rows = [
-          for (final (i, p) in projects.indexed)
-            _row(context, p, sessions[i], timelineWidth, x, gridAndNow),
+          for (final item in items)
+            _row(context, item, endOf(item), timelineWidth, x, gridAndNow),
         ];
 
         return SingleChildScrollView(
@@ -123,21 +157,23 @@ class ScheduleChart extends StatelessWidget {
 
   Widget _row(
     BuildContext context,
-    Project p,
-    ProjectSession s,
+    ChartItem item,
+    int endMinutes,
     double timelineWidth,
     double Function(int) x,
     Widget Function(double) gridAndNow,
   ) {
-    final color = _colorFor(context, p.category);
-    final start = _minutes(s.start);
-    final end = _minutes(s.end);
-    final cutoff = s.lastEntry ?? s.lastOrder;
-    final open = cutoff == null ? end : _minutes(cutoff);
+    final color = _colorFor(context, item.kind);
+    final start = _minutes(item.start);
+    final end = endMinutes;
+    final open = item.cutoff == null ? end : _minutes(item.cutoff!);
     final barWidth = x(end) - x(start);
+    final timeLabel = item.end == null
+        ? '${item.start}〜'
+        : '${item.start}〜${item.end}';
 
     return InkWell(
-      onTap: () => onTap(p),
+      onTap: item.onTap,
       child: SizedBox(
         height: _rowHeight,
         child: Row(
@@ -147,7 +183,7 @@ class ScheduleChart extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(right: 6),
                 child: Text(
-                  p.title,
+                  item.title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 11, height: 1.2),
@@ -198,7 +234,7 @@ class ScheduleChart extends StatelessWidget {
                       bottom: 0,
                       child: Center(
                         child: Text(
-                          '${s.start}〜${s.end}',
+                          timeLabel,
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
@@ -243,7 +279,15 @@ class ScheduleChart extends StatelessWidget {
             children: [
               swatch(color),
               const SizedBox(width: 4),
-              const Text('受付中', style: style),
+              const Text('企画（受付中）', style: style),
+            ],
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              swatch(_colorFor(context, 'event')),
+              const SizedBox(width: 4),
+              const Text('ステージ・大会', style: style),
             ],
           ),
           Row(
@@ -268,10 +312,10 @@ class ScheduleChart extends StatelessWidget {
     );
   }
 
-  static Color _colorFor(BuildContext context, String category) =>
-      switch (category) {
-        'campus' => Colors.teal.shade600,
-        'service' => Colors.blueGrey.shade500,
-        _ => Theme.of(context).colorScheme.primary,
-      };
+  static Color _colorFor(BuildContext context, String kind) => switch (kind) {
+    'event' => Colors.deepOrange.shade400,
+    'campus' => Colors.teal.shade600,
+    'service' => Colors.blueGrey.shade500,
+    _ => Theme.of(context).colorScheme.primary,
+  };
 }
