@@ -33,9 +33,9 @@ class HomeScreen extends StatelessWidget {
               ),
             if (festival.notices.isNotEmpty) ...[
               const SliverToBoxAdapter(child: SectionTitle('お知らせ')),
-              SliverList.list(children: [
-                for (final n in festival.notices) _NoticeCard(n),
-              ]),
+              SliverList.list(
+                children: [for (final n in festival.notices) _NoticeCard(n)],
+              ),
             ],
             ..._stageSection(context, festival, today, now),
             const SliverToBoxAdapter(child: SectionTitle('メニュー')),
@@ -47,13 +47,31 @@ class HomeScreen extends StatelessWidget {
                 crossAxisSpacing: 8,
                 children: [
                   _MenuButton(Icons.schedule, 'タイムテーブル', () => onSelectTab(1)),
-                  _MenuButton(Icons.celebration_outlined, '企画', () => onSelectTab(2)),
-                  _MenuButton(Icons.storefront_outlined, 'ブース', () => onSelectTab(2)),
+                  _MenuButton(
+                    Icons.celebration_outlined,
+                    '企画',
+                    () => onSelectTab(2),
+                  ),
+                  _MenuButton(
+                    Icons.storefront_outlined,
+                    'ブース',
+                    () => onSelectTab(2),
+                  ),
                   _MenuButton(Icons.map_outlined, 'マップ', () => onSelectTab(3)),
-                  _MenuButton(Icons.shopping_bag_outlined, 'グッズ',
-                      () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const GoodsScreen()))),
-                  _MenuButton(Icons.rule, 'ご来場の注意',
-                      () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const RulesScreen()))),
+                  _MenuButton(
+                    Icons.shopping_bag_outlined,
+                    'グッズ',
+                    () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const GoodsScreen()),
+                    ),
+                  ),
+                  _MenuButton(
+                    Icons.rule,
+                    'ご来場の注意',
+                    () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const RulesScreen()),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -65,28 +83,85 @@ class HomeScreen extends StatelessWidget {
   }
 
   /// 開催日は「開催中・この後のステージ」、それ以外は開催日程を出す。
-  List<Widget> _stageSection(BuildContext context, Festival festival, FestivalDay? today, DateTime now) {
+  List<Widget> _stageSection(
+    BuildContext context,
+    Festival festival,
+    FestivalDay? today,
+    DateTime now,
+  ) {
     if (today == null) {
+      final first = festival.edition.days.first;
+      // 日付の差で数える（時刻の端数で1日ずれないように）
+      final daysLeft = jst(
+        first.date,
+        '00:00',
+      ).difference(DateTime.utc(now.year, now.month, now.day)).inDays;
+      final isBefore = now.isBefore(jst(first.date, first.open));
+      // 開催前は初日のステージ・イベントを先に見せる（当日は上の分岐で「今日の〜」になる）
+      final preview = isBefore
+          ? festival
+                .eventsOn(first.date)
+                .where((e) => !e.isCancelled)
+                .take(3)
+                .toList()
+          : <FestivalEvent>[];
       return [
         const SliverToBoxAdapter(child: SectionTitle('開催日程')),
-        SliverList.list(children: [
-          for (final d in festival.edition.days)
-            ListTile(
-              leading: const Icon(Icons.calendar_today_outlined),
-              title: Text(d.label),
-              trailing: Text('${d.open}〜${d.close}'),
+        SliverList.list(
+          children: [
+            for (final d in festival.edition.days)
+              ListTile(
+                leading: const Icon(Icons.calendar_today_outlined),
+                title: Text(d.label),
+                trailing: Text('${d.open}〜${d.close}'),
+              ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
+              child: isBefore
+                  ? InfoRow(
+                      Icons.hourglass_bottom,
+                      daysLeft <= 0 ? '本日開幕です' : '開幕まであと$daysLeft日',
+                    )
+                  : const InfoRow(
+                      Icons.check_circle_outline,
+                      '今年の大学祭は終了しました。ご来場ありがとうございました。',
+                    ),
             ),
-        ]),
+          ],
+        ),
+        if (preview.isNotEmpty) ...[
+          SliverToBoxAdapter(
+            child: SectionTitle(
+              '${_dateOnly(first.label)}のステージ・イベント',
+              trailing: TextButton(
+                onPressed: () => onSelectTab(1),
+                child: const Text('すべて見る'),
+              ),
+            ),
+          ),
+          SliverList.list(children: [for (final e in preview) EventTile(e)]),
+        ],
       ];
     }
-    final events = festival.eventsOn(today.date).where((e) => !e.isCancelled).toList();
-    final live = events.where((e) => timingOf(e, now) == EventTiming.live).toList();
-    final next = events.where((e) => timingOf(e, now) == EventTiming.upcoming).take(3).toList();
+    final events = festival
+        .eventsOn(today.date)
+        .where((e) => !e.isCancelled)
+        .toList();
+    final live = events
+        .where((e) => timingOf(e, now) == EventTiming.live)
+        .toList();
+    final next = events
+        .where((e) => timingOf(e, now) == EventTiming.upcoming)
+        .take(3)
+        .toList();
     return [
       SliverToBoxAdapter(
         child: SectionTitle(
           '今日のステージ・イベント',
-          trailing: TextButton(onPressed: () => onSelectTab(1), child: const Text('すべて見る')),
+          trailing: TextButton(
+            onPressed: () => onSelectTab(1),
+            child: const Text('すべて見る'),
+          ),
         ),
       ),
       if (live.isEmpty && next.isEmpty)
@@ -96,11 +171,17 @@ class HomeScreen extends StatelessWidget {
             child: Text('本日のステージ・イベントはすべて終了しました。'),
           ),
         ),
-      SliverList.list(children: [
-        for (final e in [...live, ...next]) EventTile(e),
-      ]),
+      SliverList.list(
+        children: [
+          for (final e in [...live, ...next]) EventTile(e),
+        ],
+      ),
     ];
   }
+
+  /// 「11月1日(土)」→「11月1日」
+  static String _dateOnly(String label) =>
+      label.replaceAll(RegExp(r'\(.\)'), '');
 }
 
 class _Hero extends StatelessWidget {
@@ -129,10 +210,22 @@ class _Hero extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(edition.campus, style: const TextStyle(color: Colors.white70, fontSize: 13)),
+                    Text(
+                      edition.campus,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    Text(edition.name,
-                        style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold)),
+                    Text(
+                      edition.name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 8),
                     Text(
                       '${edition.days.first.label} 〜 ${edition.days.last.label}',
@@ -145,13 +238,24 @@ class _Hero extends StatelessWidget {
                           width: 44,
                           height: 44,
                           alignment: Alignment.center,
-                          decoration: BoxDecoration(color: scheme.secondary, shape: BoxShape.circle),
-                          child: Text(edition.themeKanji,
-                              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: scheme.primary)),
+                          decoration: BoxDecoration(
+                            color: scheme.secondary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            edition.themeKanji,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: scheme.primary,
+                            ),
+                          ),
                         ),
                         const SizedBox(width: 10),
-                        Text('テーマ字「${edition.themeKanji}（${edition.themeReading}）」',
-                            style: const TextStyle(color: Colors.white)),
+                        Text(
+                          'テーマ字「${edition.themeKanji}（${edition.themeReading}）」',
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ],
                     ),
                   ],
@@ -160,7 +264,11 @@ class _Hero extends StatelessWidget {
               if (edition.coverImage != null)
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: FestivalImage(edition.coverImage!, height: 170, fit: BoxFit.cover),
+                  child: FestivalImage(
+                    edition.coverImage!,
+                    height: 170,
+                    fit: BoxFit.cover,
+                  ),
                 ),
             ],
           ),
@@ -180,8 +288,14 @@ class _NoticeCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: ExpansionTile(
-        leading: Icon(Icons.campaign_outlined, color: Theme.of(context).colorScheme.error),
-        title: Text(notice.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        leading: Icon(
+          Icons.campaign_outlined,
+          color: Theme.of(context).colorScheme.error,
+        ),
+        title: Text(
+          notice.title,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         shape: const Border(),
         childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
         children: [Text(notice.body, style: const TextStyle(height: 1.6))],
@@ -211,7 +325,11 @@ class _MenuButton extends StatelessWidget {
           children: [
             Icon(icon, size: 30, color: scheme.primary),
             const SizedBox(height: 6),
-            Text(label, style: const TextStyle(fontSize: 12), textAlign: TextAlign.center),
+            Text(
+              label,
+              style: const TextStyle(fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),

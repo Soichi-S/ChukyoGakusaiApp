@@ -19,6 +19,9 @@ concurrency:
 env:
   BASE_HREF: /ChukyoGakusaiApp/
   DATA_BASE_URL: https://soichi-s.github.io/ChukyoGakusaiApp/data/
+  # 確認用に日時を固定した版。/preview/ は開催中、/preview-before/ は開催前の表示。
+  PREVIEW_NOW: 2025-11-02T13:55
+  PREVIEW_BEFORE_NOW: 2025-10-25T12:00
 
 jobs:
   build:
@@ -40,16 +43,32 @@ jobs:
           --base-href "$BASE_HREF"
           --dart-define=DATA_BASE_URL="$DATA_BASE_URL"
 
-      - name: Publish data/ next to the app
+      - name: Collect site and publish data/ next to the app
         run: |
-          mkdir -p build/web/data
-          cp -r data/. build/web/data/
-          rm -f build/web/data/README.md
+          mkdir -p site
+          cp -r build/web/. site/
+          mkdir -p site/data
+          cp -r data/. site/data/
+          rm -f site/data/README.md
+
+      # 日時を固定した確認用の版。本番（サイト直下）は実際の日時で動く。
+      - name: Build previews with fixed dates
+        run: |
+          build_preview() {
+            flutter build web --release \
+              --base-href "${BASE_HREF}$1/" \
+              --dart-define=DATA_BASE_URL="$DATA_BASE_URL" \
+              --dart-define=DEBUG_NOW="$2"
+            mkdir -p "site/$1"
+            cp -r build/web/. "site/$1/"
+          }
+          build_preview preview "$PREVIEW_NOW"
+          build_preview preview-before "$PREVIEW_BEFORE_NOW"
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: build/web
+          path: site
 
   deploy:
     needs: build
